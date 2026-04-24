@@ -1,7 +1,6 @@
-package com.mateus.dao
+package com.mateus.microredesocial.dao
 
-import com.google.firebase.firestore.FirebaseFirestore
-import com.mateus.model.User
+import com.mateus.microredesocial.model.User
 
 class UserDAO {
     private val db = FirebaseFirestore.getInstance()

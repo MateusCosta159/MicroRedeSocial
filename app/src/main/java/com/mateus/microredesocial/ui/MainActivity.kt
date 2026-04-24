@@ -1,4 +1,4 @@
-package com.mateus.ui
+package com.mateus.microredesocial.ui
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

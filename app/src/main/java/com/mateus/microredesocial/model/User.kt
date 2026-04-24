@@ -1,4 +1,4 @@
-package com.mateus.model
+package com.mateus.microredesocial.model
 
 data class User(
     val email: String = "",
