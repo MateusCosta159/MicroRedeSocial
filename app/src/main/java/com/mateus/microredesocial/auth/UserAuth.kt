@@ -1,4 +1,4 @@
-package com.mateus.auth
+package com.mateus.microredesocial.auth
 
 import com.google.firebase.auth.FirebaseAuth
 

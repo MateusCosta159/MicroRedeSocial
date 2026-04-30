@@ -3,12 +3,8 @@ package com.mateus.microredesocial.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mateus.microredesocial.databinding.ItemPostBinding
 import com.mateus.microredesocial.model.Post
-import com.mateus.microredesocial.utils.Base64Converter
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class PostAdapter(
     private val posts: MutableList<Post>,
@@ -32,7 +28,7 @@ class PostAdapter(
             txtAutorNome.text = post.autorNome
             txtCidade.text = if (post.cidade.isNotEmpty()) "📍 ${post.cidade}" else ""
 
-            val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", java.util.Locale.getDefault())
             txtTimestamp.text = sdf.format(Date(post.timestamp))
 
             val bitmap = Base64Converter.stringToBitmap(post.imageString)
