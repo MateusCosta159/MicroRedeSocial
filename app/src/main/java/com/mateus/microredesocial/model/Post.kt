@@ -1,12 +1,13 @@
 package com.mateus.microredesocial.model
 
-import android.graphics.Bitmap
-
 data class Post(
-    val descricao: String = "",
-    val imagem: Bitmap? = null,
-    val autorEmail: String = "",
-    val autorUsername: String = "",
-    val autorFoto: Bitmap? = null,
-    val cidade: String = ""
+    val id: String = "",
+    val userId: String = "",
+    val description: String = "",
+    val image: String? = null,
+    val timestamp: Long = 0L,
+    val latitude: Double? = null,
+    val longitude: Double? = null,
+    val locationName: String? = null,
+    val commentCount: Int = 0
 )

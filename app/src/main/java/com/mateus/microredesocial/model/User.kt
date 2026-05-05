@@ -1,8 +1,9 @@
 package com.mateus.microredesocial.model
 
 data class User(
-    val email: String = "",
+    val uid: String = "",
+    val name: String = "",
     val username: String = "",
-    val nomeCompleto: String = "",
-    val fotoPerfil: String = ""
+    val email: String = "",
+    val photo: String? = null
 )

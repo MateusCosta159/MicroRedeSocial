@@ -1,7 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.MicroRedeSocial" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<resources>
+    <style name="Base.Theme.Triply" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#0077B6</item>
+        <item name="colorOnPrimary">#001F2E</item>
+        <item name="colorPrimaryContainer">#004D73</item>
+        <item name="colorOnPrimaryContainer">#E0F4FF</item>
+        <item name="colorSecondary">#48CAE4</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
+        <item name="colorTertiary">#ADE8F4</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

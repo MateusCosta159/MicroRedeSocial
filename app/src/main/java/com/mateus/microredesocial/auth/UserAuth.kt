@@ -1,30 +1,54 @@
 package com.mateus.microredesocial.auth
 
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
 class UserAuth {
+
     private val auth = FirebaseAuth.getInstance()
 
-    fun login(email: String, pass: String, callback: (Boolean) -> Unit) {
+    fun login(email: String, pass: String, callback: (Boolean, String?) -> Unit) {
         auth.signInWithEmailAndPassword(email, pass)
-            .addOnCompleteListener { task -> callback(task.isSuccessful) }
+            .addOnCompleteListener { task ->
+                callback(task.isSuccessful, task.exception?.message)
+            }
     }
 
-    fun cadastro(email: String, pass: String, callback: (Boolean, String?) -> Unit) {
+    fun register(email: String, pass: String, callback: (Boolean, String?) -> Unit) {
         auth.createUserWithEmailAndPassword(email, pass)
             .addOnCompleteListener { task ->
                 callback(task.isSuccessful, task.exception?.message)
             }
     }
 
-    fun atualizarSenha(novaSenha: String, callback: (Boolean, String?) -> Unit) {
-        auth.currentUser?.updatePassword(novaSenha)
-            ?.addOnCompleteListener { task ->
-                callback(task.isSuccessful, task.exception?.message)
-            } ?: callback(false, "Usuário não autenticado")
+    fun sendPasswordReset(email: String, callback: (Boolean) -> Unit) {
+        auth.sendPasswordResetEmail(email)
+            .addOnCompleteListener { task -> callback(task.isSuccessful) }
     }
 
-    fun getEmailUsuarioLogado(): String? = auth.currentUser?.email
+    fun changePassword(
+        currentPassword: String,
+        newPassword: String,
+        callback: (Boolean, String?) -> Unit
+    ) {
+        val user = auth.currentUser
+            ?: run { callback(false, "Usuário não autenticado"); return }
+        val email = user.email
+            ?: run { callback(false, "E-mail não encontrado"); return }
 
+        val credential = EmailAuthProvider.getCredential(email, currentPassword)
+        user.reauthenticate(credential).addOnCompleteListener { reauth ->
+            if (!reauth.isSuccessful) {
+                callback(false, reauth.exception?.message ?: "Senha atual incorreta")
+                return@addOnCompleteListener
+            }
+            user.updatePassword(newPassword).addOnCompleteListener { update ->
+                callback(update.isSuccessful, update.exception?.message)
+            }
+        }
+    }
+
+    fun getCurrentUid(): String? = auth.currentUser?.uid
+    fun isLoggedIn(): Boolean = auth.currentUser != null
     fun logout() = auth.signOut()
 }
